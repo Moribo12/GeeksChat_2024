@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+
+    <title>Chat Application</title>
+
+</head>
+<body>
+
+<!--<div class="user-form" id="username-page">-->
+<!--    <h2>Enter Chatroom</h2>-->
+<!--    <form id="usernameForm">-->
+<!--        <label for="nickname">Nickname:</label>-->
+<!--        <input type="text" id="nickname" name="nickname" required>-->
+
+<!--        <label for="fullname">Real Name:</label>-->
+<!--        <input type="text" id="fullname" name="realname" required>-->
+
+<!--        <button type="submit">Enter Chatroom</button>-->
+<!--    </form>-->
+<!--</div>-->
+
+
+<div class="chat-container " id="chat-page">
+
+    <div class="users-list">
+
+        <div class="header">
+            <div class="profile">
+                <div class="user">
+<!--                    <p id="connected-user-fullname"></p>-->
+                    <h4 th:text="${userUsername}"> </h4>
+                </div>
+            </div>
+            <ul class="nav_icons">
+                <li><i class="fa-solid fa-circle-notch fa-sm"></i></li>
+                <li><i class="fa-solid fa-message fa-sm"></i></li>
+                <li><i class="fa-solid fa-ellipsis-vertical fa-sm"></i></li>
+            </ul>
+        </div>
+
+        <div class="search_chat">
+            <div>
+                <input type="text" placeholder="Search">
+                <i class="fa-solid fa-magnifying-glass fa-xs"></i>
+            </div>
+        </div>
+
+        <div class="users-list-container">
+            <ul id="connectedUsers">
+            </ul>
+        </div>
+        <div>
+            <button class="logout"  id="logout" >Logout</button>
+        </div>
+    </div>
+
+
+    <div class="chat-area">
+        <div class="header look">
+            <div class="imgText" id="imgText">
+                <div class="userimg" id="userimg" >
+                    <img src="/img/profile3.jpg">
+                </div>
+                <div class="username">
+                    <h4>Lala Smith </h4><br>
+                </div>
+            </div>
+            <ul class="nav_icons">
+                <li><i class="fa-solid fa-magnifying-glass fa-sm"></i></li>
+                <li><i class="fa-solid fa-ellipsis-vertical fa-sm"></i></li>
+            </ul>
+        </div>
+
+        <div class="chat-area" id="chat-messages" >
+        </div>
+
+        <form id="messageForm" name="messageForm" class="hidden">
+            <div class="message-input">
+                <input autocomplete="off" type="text" id="message" placeholder="Type your message...">
+                <button> Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="/js/main.js">
+</script>
+<script>
+    const nickName = `[[${userUsername}]]`;
+    connectToChatApp(nickName)
+</script>
+</body>
+</html>
