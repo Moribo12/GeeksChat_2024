@@ -8,6 +8,8 @@ const messageInput = document.querySelector('#message');
 const connectingElement = document.querySelector('.connecting');
 const chatArea = document.querySelector('#chat-messages');
 const logout = document.querySelector('#logout');
+const drop =document.querySelector(".dropdown_menu");
+const dots = document.querySelector(".three_dots");
 
 let stompClient = null;
 let nickname = null;
@@ -16,12 +18,9 @@ let selectedUserId = null;
 
 
 function connectToChatApp(nickName) {
-    // Replace this URL with the URL of your Spring Boot application
     var socket = new SockJS("/ws");
     stompClient = Stomp.over(socket);
-//    nickname = nickName;
 
-// you can remove the status:ONLINE you don't need it here, cause the status only changes after logging in
      stompClient.connect({nickName: nickname}, {}, function(frame) {
         // Subscribe to a topic, send messages, etc.
         stompClient.subscribe(`/user/${nickName}/queue/messages`, onMessageReceived);
@@ -30,13 +29,12 @@ function connectToChatApp(nickName) {
     }, function(error) {
         console.log('STOMP error: ' + error);
     });
-
     findAndDisplayConnectedUsers().then();
 }
 
 
 async function findAndDisplayConnectedUsers() {
-
+     //logged user
     const currentUserNickname = `${nickName}`;
 
     const connectedUsersResponse = await fetch('/users');
@@ -186,16 +184,18 @@ function onLogout() {
  if(stompClient != null){
     stompClient.send('/logout',
         {},
-       // you can remove the status:OFFLINE you don't need it here, cause the status only changes after logging out in the method with /logout/{nickName}
       JSON.stringify({nickName: nickname,})
     );
-    //you can remove and put window.location.reload() or remove it completely
    window.location.href = "/logout/"+nickName;
     }else{
      console.error('stompClient is not initialized.');
     }
 }
 
+
+dots.addEventListener('click', function(){
+   drop.classList.toggle("show");
+})
 
 messageForm.addEventListener('submit', sendMessage, true);
 logout.addEventListener('click', onLogout, true);

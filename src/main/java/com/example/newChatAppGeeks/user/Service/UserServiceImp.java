@@ -40,7 +40,6 @@ public class UserServiceImp implements UserService {
 
             return this.userRepository.save(user);
         }
-
     }
 
     public User authenticate(String nickName, String password){

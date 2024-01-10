@@ -9,26 +9,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
-
-    <title>Chat Application</title>
-
+    <title>Geeks Chat App</title>
 </head>
+
 <body>
-
-<!--<div class="user-form" id="username-page">-->
-<!--    <h2>Enter Chatroom</h2>-->
-<!--    <form id="usernameForm">-->
-<!--        <label for="nickname">Nickname:</label>-->
-<!--        <input type="text" id="nickname" name="nickname" required>-->
-
-<!--        <label for="fullname">Real Name:</label>-->
-<!--        <input type="text" id="fullname" name="realname" required>-->
-
-<!--        <button type="submit">Enter Chatroom</button>-->
-<!--    </form>-->
-<!--</div>-->
-
-
 <div class="chat-container " id="chat-page">
 
     <div class="users-list">
@@ -36,14 +20,13 @@
         <div class="header">
             <div class="profile">
                 <div class="user">
-<!--                    <p id="connected-user-fullname"></p>-->
                     <h4 th:text="${userUsername}"> </h4>
                 </div>
             </div>
             <ul class="nav_icons">
                 <li><i class="fa-solid fa-circle-notch fa-sm"></i></li>
                 <li><i class="fa-solid fa-message fa-sm"></i></li>
-                <li><i class="fa-solid fa-ellipsis-vertical fa-sm"></i></li>
+                <li class="three_dots"><i class="fa-solid fa-ellipsis-vertical fa-sm"></i></li>
             </ul>
         </div>
 
@@ -58,9 +41,23 @@
             <ul id="connectedUsers">
             </ul>
         </div>
-        <div>
-            <button class="logout"  id="logout" >Logout</button>
+
+
+        <div class="dropdown_menu">
+            <div class="drop_list">
+                <p>Archived</p>
+            </div>
+            <div class="drop_list">
+                <p>Starred</p>
+            </div>
+            <div class="drop_list">
+                <p>Settings</p>
+            </div>
+            <div class="drop_list">
+                <p  id="logout">Log out</p>
+            </div>
         </div>
+
     </div>
 
 
@@ -81,11 +78,13 @@
         </div>
 
         <div class="chat-area" id="chat-messages" >
+
         </div>
 
         <form id="messageForm" name="messageForm" class="hidden">
             <div class="message-input">
                 <input autocomplete="off" type="text" id="message" placeholder="Type your message...">
+                <i class="fa-solid fa-paper-plane"></i>
                 <button> Send</button>
             </div>
         </form>
